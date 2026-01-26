@@ -2,189 +2,222 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Untuk Kamu — Davis</title>
+<title>Davis & Yonna</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap');
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  background: radial-gradient(circle at top, #1a1a1a, #000);
   height:100vh;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
   overflow:hidden;
-  color:white;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
 }
 
-/* BACKGROUND ANIMATION */
-.stars span{
+/* BACKGROUND LIGHTS */
+.lights span{
   position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  opacity:0.6;
-  animation: twinkle linear infinite;
+  width:6px;
+  height:6px;
+  background:rgba(255,255,255,0.8);
+  border-radius:50%;
+  animation: floatUp linear infinite;
 }
 
-@keyframes twinkle{
-  from{ transform:translateY(0); opacity:0 }
-  to{ transform:translateY(100vh); opacity:1 }
+@keyframes floatUp{
+  from{transform:translateY(110vh);opacity:0}
+  to{transform:translateY(-10vh);opacity:1}
 }
 
-/* CENTER CARD */
+/* CENTER */
 .container{
-  position:relative;
-  z-index:2;
   height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
+  text-align:center;
+  position:relative;
+  z-index:2;
 }
 
 .card{
-  width:380px;
-  padding:35px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(15px);
-  box-shadow:0 0 40px rgba(255,0,100,0.25);
-  text-align:center;
-  animation: float 4s ease-in-out infinite;
+  padding:50px 40px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 50px rgba(255,105,180,0.35);
+  animation: cardFloat 5s ease-in-out infinite;
 }
 
-@keyframes float{
-  0%,100%{ transform:translateY(0)}
-  50%{ transform:translateY(-15px)}
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-18px)}
 }
 
 h1{
-  color:#ff4d6d;
-  margin-bottom:15px;
-  font-size:30px;
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  color:#ffb6c1;
   animation: glow 2s infinite alternate;
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 10px #ff4d6d}
-  to{text-shadow:0 0 25px #ff4d6d}
+  from{text-shadow:0 0 10px #ffb6c1}
+  to{text-shadow:0 0 30px #ff69b4}
+}
+
+.subtitle{
+  margin:12px 0 25px;
+  letter-spacing:2px;
+  color:#eee;
 }
 
 p{
-  font-size:16px;
-  line-height:1.8;
-  margin-bottom:20px;
+  font-size:17px;
+  line-height:1.9;
+  margin-bottom:25px;
   opacity:0;
-  animation: fadeUp 1.5s ease forwards;
-  animation-delay:0.5s;
+  animation: fadeIn 1.8s ease forwards;
+  animation-delay:.5s;
 }
 
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px)}
-  to{opacity:1; transform:translateY(0)}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 button{
-  padding:12px 30px;
+  padding:12px 35px;
+  margin:6px;
   border:none;
   border-radius:30px;
-  background:#ff4d6d;
+  background:linear-gradient(45deg,#ff5f9e,#ff9ecf);
   color:white;
   font-size:15px;
   cursor:pointer;
-  box-shadow:0 0 15px rgba(255,77,109,0.7);
-  transition:0.3s;
+  transition:.3s;
+  box-shadow:0 0 20px rgba(255,105,180,.7);
 }
 
 button:hover{
   transform:scale(1.1);
-  box-shadow:0 0 30px rgba(255,77,109,1);
+  box-shadow:0 0 35px rgba(255,105,180,1);
 }
 
-.from{
-  margin-top:15px;
-  font-size:13px;
-  color:#aaa;
-}
-
-/* HEART ANIMATION */
+/* HEARTS */
 .heart{
   position:absolute;
-  color:#ff4d6d;
-  font-size:20px;
-  animation: rise 4s linear forwards;
+  font-size:22px;
+  color:#ff69b4;
+  animation: heartFly 4s linear forwards;
 }
 
-@keyframes rise{
-  from{transform:translateY(0) scale(1); opacity:1}
-  to{transform:translateY(-300px) scale(1.8); opacity:0}
+@keyframes heartFly{
+  from{transform:translateY(0) scale(1);opacity:1}
+  to{transform:translateY(-350px) scale(1.8);opacity:0}
+}
+
+.footer{
+  margin-top:15px;
+  font-size:13px;
+  color:#ddd;
 }
 </style>
 </head>
 
 <body>
 
-<!-- STARS -->
-<div class="stars"></div>
+<!-- MUSIK -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3c1a1f91.mp3?filename=romantic-love-story-112191.mp3" type="audio/mpeg">
+</audio>
+
+<div class="lights"></div>
 
 <div class="container">
   <div class="card">
-    <h1>Hai, Kamu 🤍</h1>
+    <h1>Davis & Yonna</h1>
+    <div class="subtitle">CINTA · TAKDIR · SELAMANYA</div>
+
     <p id="text">
-      Aku nggak pandai merangkai kata,<br>
-      tapi setiap kamu muncul di pikiranku,<br>
-      dunia terasa lebih masuk akal.
+      Dari sekian banyak pertemuan,<br>
+      semesta memilihkan satu yang bernama<br>
+      Davis & Yonna.
     </p>
-    <button onclick="nextGombal()">Klik Pelan-Pelan 😉</button>
-    <div class="from">— Davis</div>
+
+    <button onclick="nextText()">💖 Sentuh Cinta</button>
+    <button onclick="toggleMusic()">🎵 Musik</button>
+
+    <div class="footer">
+      Dibuat dengan cinta, bukan kebetulan
+    </div>
   </div>
 </div>
 
 <script>
-/* STARS GENERATOR */
-for(let i=0;i<120;i++){
-  const star=document.createElement("span");
-  star.style.left=Math.random()*100+"vw";
-  star.style.top=Math.random()*100+"vh";
-  star.style.animationDuration=3+Math.random()*5+"s";
-  document.querySelector(".stars").appendChild(star);
+/* LIGHTS */
+for(let i=0;i<110;i++){
+  const l=document.createElement("span");
+  l.style.left=Math.random()*100+"vw";
+  l.style.animationDuration=5+Math.random()*6+"s";
+  document.querySelector(".lights").appendChild(l);
 }
 
-/* GOMBALAN */
-const gombal=[
- "Kalau kamu hujan,<br>aku rela kehujanan asal bareng kamu.",
- "Aku nggak butuh peta,<br>soalnya hatiku selalu ke kamu.",
- "Kamu itu sederhana,<br>tapi bikin hidupku luar biasa.",
- "Kalau rindu itu dosa,<br>aku udah masuk neraka dari lama.",
- "Tenang aja,<br>aku bukan singgah… aku niat tinggal."
+/* MUSIC */
+const music=document.getElementById("music");
+let musicStarted=false;
+
+function toggleMusic(){
+  if(music.paused){
+    music.play();
+  }else{
+    music.pause();
+  }
+}
+
+/* TEXTS */
+const texts=[
+ "Cinta bukan tentang siapa yang datang lebih dulu,<br>tapi siapa yang memilih bertahan.",
+ "Davis menemukan rumah di senyum Yonna,<br>dan Yonna menemukan tenang di pelukan Davis.",
+ "Bersamamu, masa depan terasa layak diperjuangkan.",
+ "Jika cinta adalah doa,<br>nama kalian selalu ada di setiap amin.",
+ "Bukan kebetulan,<br>ini takdir yang diperjuangkan."
 ];
 
-let index=0;
-function nextGombal(){
-  index=(index+1)%gombal.length;
-  const text=document.getElementById("text");
-  text.style.opacity=0;
+let last=-1;
+function nextText(){
+  if(!musicStarted){
+    music.play();
+    musicStarted=true;
+  }
+
+  let i;
+  do{i=Math.floor(Math.random()*texts.length)}while(i===last);
+  last=i;
+
+  const t=document.getElementById("text");
+  t.style.opacity=0;
   setTimeout(()=>{
-    text.innerHTML=gombal[index];
-    text.style.opacity=1;
+    t.innerHTML=texts[i];
+    t.style.opacity=1;
   },300);
+
   spawnHeart();
 }
 
-/* HEART EFFECT */
+/* HEART */
 function spawnHeart(){
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.bottom="0";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),4000);
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.bottom="0";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
 }
 </script>
 
