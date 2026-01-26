@@ -31,46 +31,71 @@ section{
   overflow:hidden;
 }
 
-/* ===== FALLING LEAVES ===== */
+/* ===== LEAVES CONTAINER ===== */
+.leaves{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+/* ===== LEAF ===== */
 .leaf{
   position:absolute;
-  top:-50px;
-  width:18px;
-  height:18px;
-  background:rgba(0,255,180,0.5);
-  border-radius:50% 0;
-  opacity:0.7;
+  top:-10%;
+  width:14px;
+  height:14px;
+  background:linear-gradient(135deg,#7CFF9B,#FFE27A);
+  border-radius:0 100% 0 100%;
+  opacity:0.8;
   animation: fall linear infinite;
 }
 
 @keyframes fall{
-  from{
-    transform:translateY(-60px) translateX(0) rotate(0deg);
+  0%{
+    transform:translateX(0) translateY(0) rotate(0deg);
   }
-  to{
-    transform:translateY(110vh) translateX(80px) rotate(360deg);
+  100%{
+    transform:translateX(120px) translateY(120vh) rotate(360deg);
   }
 }
 
-/* generate different leaves */
-.leaf:nth-child(1){left:10%; animation-duration:12s;}
-.leaf:nth-child(2){left:25%; animation-duration:15s;}
-.leaf:nth-child(3){left:40%; animation-duration:10s;}
-.leaf:nth-child(4){left:55%; animation-duration:14s;}
-.leaf:nth-child(5){left:70%; animation-duration:11s;}
-.leaf:nth-child(6){left:85%; animation-duration:16s;}
+/* MANY LEAVES */
+.leaf:nth-child(odd){animation-duration:12s;}
+.leaf:nth-child(even){animation-duration:16s;}
+
+.leaf:nth-child(1){left:5%;}
+.leaf:nth-child(2){left:10%;}
+.leaf:nth-child(3){left:15%;}
+.leaf:nth-child(4){left:20%;}
+.leaf:nth-child(5){left:25%;}
+.leaf:nth-child(6){left:30%;}
+.leaf:nth-child(7){left:35%;}
+.leaf:nth-child(8){left:40%;}
+.leaf:nth-child(9){left:45%;}
+.leaf:nth-child(10){left:50%;}
+.leaf:nth-child(11){left:55%;}
+.leaf:nth-child(12){left:60%;}
+.leaf:nth-child(13){left:65%;}
+.leaf:nth-child(14){left:70%;}
+.leaf:nth-child(15){left:75%;}
+.leaf:nth-child(16){left:80%;}
+.leaf:nth-child(17){left:85%;}
+.leaf:nth-child(18){left:90%;}
+.leaf:nth-child(19){left:95%;}
+.leaf:nth-child(20){left:98%;}
 
 /* ===== NAME ===== */
 .name{
   font-size:1.4rem;
   letter-spacing:6px;
-  opacity:0.9;
+  opacity:0.95;
   animation:glow 2s ease-in-out infinite alternate;
+  z-index:2;
 }
 
 @keyframes glow{
   from{text-shadow:0 0 6px rgba(0,255,255,0.3);}
-  to{text-shadow:0 0 18px rgba(0,255,255,0.8);}
+  to{text-shadow:0 0 18px rgba(0,255,255,0.9);}
 }
 
 /* ===== QUOTE ===== */
@@ -78,10 +103,8 @@ section{
   margin-top:14px;
   font-size:0.9rem;
   letter-spacing:1px;
-  color:#aaa;
-  opacity:0;
-  animation:fadeUp 1.5s ease forwards;
-  animation-delay:0.6s;
+  color:#ccc;
+  animation:fadeUp 1.2s ease forwards;
 }
 
 @keyframes fadeUp{
@@ -140,20 +163,19 @@ footer{
 
 <!-- HERO -->
 <section>
-  <!-- leaves -->
-  <span class="leaf"></span>
-  <span class="leaf"></span>
-  <span class="leaf"></span>
-  <span class="leaf"></span>
-  <span class="leaf"></span>
-  <span class="leaf"></span>
+  <div class="leaves">
+    <!-- 20 leaves -->
+    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
+    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
+    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
+    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
+  </div>
 
   <div class="name">DAVIS IKBALL</div>
   <div class="quote">Diam, bergerak, lalu tumbuh — dengan caraku sendiri.</div>
   <div class="scroll">SCROLL ↓</div>
 </section>
 
-<!-- SOCIAL -->
 <section>
   <div class="social">
     <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
