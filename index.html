@@ -10,31 +10,35 @@ html,body{
   margin:0;
   padding:0;
   background:#000;
-  overflow:hidden;
+  color:white;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x:hidden;
 }
 
-/* CANVAS */
+/* CANVAS FIRE */
 canvas{
   position:fixed;
-  inset:0;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:100%;
   z-index:-1;
 }
 
-/* CENTER TEXT */
-.center{
-  position:absolute;
-  inset:0;
+/* SECTION */
+section{
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  color:white;
+  padding:60px 10%;
 }
 
+/* HERO TEXT */
 .name{
-  font-size:1.6rem;
+  font-size:1.8rem;
   letter-spacing:6px;
   text-shadow:
     0 0 10px #ff5500,
@@ -42,10 +46,55 @@ canvas{
 }
 
 .quote{
-  margin-top:12px;
-  font-size:0.9rem;
-  color:#ccc;
+  margin-top:14px;
+  font-size:0.95rem;
+  color:#ddd;
   opacity:0.85;
+}
+
+/* SCROLL */
+.scroll{
+  margin-top:60px;
+  font-size:12px;
+  opacity:0.6;
+  animation:upDown 1.4s infinite;
+}
+
+@keyframes upDown{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(10px);}
+}
+
+/* SOCIAL */
+.social{
+  width:100%;
+  max-width:900px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+}
+
+.social a{
+  padding:20px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  text-decoration:none;
+  color:white;
+  transition:0.4s;
+}
+
+.social a:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 25px rgba(255,120,0,0.5);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  font-size:12px;
+  color:#777;
 }
 </style>
 </head>
@@ -54,10 +103,27 @@ canvas{
 
 <canvas id="fire"></canvas>
 
-<div class="center">
-  <div class="name">DAVIS IKBAL</div>
+<!-- HERO -->
+<section>
+  <div class="name">Davisikbal</div>
   <div class="quote">Tenang di luar, membara di dalam.</div>
-</div>
+  <div class="scroll">SCROLL ↓</div>
+</section>
+
+<!-- SOCIAL -->
+<section>
+  <div class="social">
+    <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@ikbald_" target="_blank">TikTok</a>
+    <a href="https://t.me/davisikball" target="_blank">Telegram</a>
+    <a href="https://twitter.com/Davisikball" target="_blank">Twitter</a>
+    <a href="https://wa.me/message/I6EZVKRNHE27A1" target="_blank">WhatsApp Business</a>
+    <a href="https://youtube.com/@Davisikball" target="_blank">YouTube</a>
+    <a href="https://open.spotify.com/user/31kawlca7npeldocnf2chnzrfxd4" target="_blank">Spotify</a>
+  </div>
+</section>
+
+<footer>© Davisikbal</footer>
 
 <script>
 const canvas = document.getElementById("fire");
@@ -71,7 +137,7 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-/* PARTICLES */
+/* FIRE PARTICLES */
 const particles = [];
 
 class FireParticle{
@@ -80,37 +146,35 @@ class FireParticle{
   }
   reset(){
     this.x = Math.random()*w;
-    this.y = h + Math.random()*50;
-    this.size = Math.random()*4 + 1;
+    this.y = h + Math.random()*100;
+    this.size = Math.random()*3 + 1;
     this.speed = Math.random()*2 + 1;
-    this.life = Math.random()*60 + 60;
+    this.life = Math.random()*80 + 60;
   }
   update(){
     this.y -= this.speed;
-    this.x += Math.sin(this.y*0.02)*0.6;
+    this.x += Math.sin(this.y*0.02)*0.5;
     this.life--;
     if(this.life <= 0){
       this.reset();
     }
   }
   draw(){
-    const gradient = ctx.createRadialGradient(
+    const g = ctx.createRadialGradient(
       this.x,this.y,0,
-      this.x,this.y,this.size*3
+      this.x,this.y,this.size*4
     );
-    gradient.addColorStop(0,"rgba(255,200,50,0.9)");
-    gradient.addColorStop(0.5,"rgba(255,100,0,0.6)");
-    gradient.addColorStop(1,"rgba(255,0,0,0)");
-
-    ctx.fillStyle = gradient;
+    g.addColorStop(0,"rgba(255,220,120,0.9)");
+    g.addColorStop(0.5,"rgba(255,120,0,0.6)");
+    g.addColorStop(1,"rgba(255,0,0,0)");
+    ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size*3,0,Math.PI*2);
+    ctx.arc(this.x,this.y,this.size*4,0,Math.PI*2);
     ctx.fill();
   }
 }
 
-/* CREATE FIRE */
-for(let i=0;i<250;i++){
+for(let i=0;i<260;i++){
   particles.push(new FireParticle());
 }
 
