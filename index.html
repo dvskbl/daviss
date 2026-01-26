@@ -2,215 +2,179 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Davis & Yonna</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Davis Ikball</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;600&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
 
-*{margin:0;padding:0;box-sizing:border-box}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-  height:100vh;
-  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-  overflow:hidden;
-  font-family:'Poppins',sans-serif;
-  color:#fff;
+    background:#050505;
+    color:#fff;
+    overflow-x:hidden;
 }
 
-/* BACKGROUND LIGHT */
-.lights span{
-  position:absolute;
-  width:6px;
-  height:6px;
-  background:rgba(255,255,255,0.8);
-  border-radius:50%;
-  animation: floatUp linear infinite;
+/* BACKGROUND ANIMATION */
+.bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle at 20% 20%, #1a1a1a, transparent),
+               radial-gradient(circle at 80% 80%, #0f0f0f, transparent);
+    animation: bgMove 10s infinite alternate;
+    z-index:-1;
 }
 
-@keyframes floatUp{
-  from{transform:translateY(110vh);opacity:0}
-  to{transform:translateY(-10vh);opacity:1}
+@keyframes bgMove{
+    0%{filter:hue-rotate(0deg);}
+    100%{filter:hue-rotate(40deg);}
 }
 
-/* CENTER */
-.container{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-  z-index:2;
+/* SECTION */
+section{
+    min-height:100vh;
+    padding:80px 10%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.card{
-  padding:50px 40px;
-  border-radius:25px;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(18px);
-  box-shadow:0 0 50px rgba(255,105,180,0.35);
-  animation: float 5s ease-in-out infinite;
+/* HERO */
+.hero h1{
+    font-size:4rem;
+    letter-spacing:4px;
+    animation: glow 2s infinite alternate;
 }
 
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-18px)}
-}
-
-h1{
-  font-family:'Playfair Display',serif;
-  font-size:42px;
-  color:#ffb6c1;
-  animation: glow 2s infinite alternate;
+.hero p{
+    margin-top:20px;
+    font-size:1.2rem;
+    color:#aaa;
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 10px #ffb6c1}
-  to{text-shadow:0 0 30px #ff69b4}
+    from{text-shadow:0 0 10px #444;}
+    to{text-shadow:0 0 30px #00ffee;}
 }
 
-.subtitle{
-  margin:12px 0 25px;
-  letter-spacing:2px;
-  color:#eee;
+/* SCROLL ANIMATION */
+.reveal{
+    opacity:0;
+    transform:translateY(80px);
+    transition:1s;
 }
 
-p{
-  font-size:17px;
-  line-height:1.9;
-  margin-bottom:25px;
-  opacity:1;
-  transition:opacity 0.4s ease;
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
 }
 
-button{
-  padding:12px 35px;
-  margin:6px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(45deg,#ff5f9e,#ff9ecf);
-  color:white;
-  font-size:15px;
-  cursor:pointer;
-  transition:.3s;
-  box-shadow:0 0 20px rgba(255,105,180,.7);
+/* SOCIAL */
+.social{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:25px;
+    margin-top:40px;
 }
 
-button:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 35px rgba(255,105,180,1);
+.social a{
+    text-decoration:none;
+    color:#fff;
+    padding:20px;
+    border:1px solid #222;
+    background:rgba(255,255,255,0.02);
+    text-align:center;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
 }
 
-/* HEART */
-.heart{
-  position:absolute;
-  font-size:22px;
-  color:#ff69b4;
-  animation: heartFly 4s linear forwards;
+.social a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg, transparent, rgba(0,255,255,0.4), transparent);
+    transition:0.5s;
 }
 
-@keyframes heartFly{
-  from{transform:translateY(0) scale(1);opacity:1}
-  to{transform:translateY(-350px) scale(1.8);opacity:0}
+.social a:hover::before{
+    left:100%;
 }
 
-.footer{
-  margin-top:15px;
-  font-size:13px;
-  color:#ddd;
+.social a:hover{
+    transform:translateY(-8px) scale(1.05);
+    border-color:#00ffee;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px;
+    color:#555;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3c1a1f91.mp3?filename=romantic-love-story-112191.mp3" type="audio/mpeg">
-</audio>
+<div class="bg"></div>
 
-<div class="lights"></div>
+<section class="hero">
+    <h1>DAVIS IKBALL</h1>
+    <p>Dark • Elegant • Animated Website</p>
+</section>
 
-<div class="container">
-  <div class="card">
-    <h1>Davis & Yonna</h1>
-    <div class="subtitle">CINTA · TAKDIR · SELAMANYA</div>
+<section class="reveal">
+    <h2>Social Media</h2>
 
-    <p id="text">
-      Klik tombol di bawah ini 🤍
-    </p>
-
-    <button onclick="nextText()">💖 Sentuh Cinta</button>
-    <button onclick="toggleMusic()">🎵 Musik</button>
-
-    <div class="footer">
-      Dibuat dengan cinta, bukan kebetulan
+    <div class="social">
+        <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@ikbald_" target="_blank">TikTok</a>
+        <a href="https://t.me/davisikball" target="_blank">Telegram</a>
+        <a href="https://twitter.com/Davisikball" target="_blank">Twitter</a>
+        <a href="https://wa.me/message/I6EZVKRNHE27A1" target="_blank">WhatsApp Business</a>
+        <a href="https://youtube.com/@Davisikball" target="_blank">YouTube</a>
+        <a href="https://open.spotify.com/user/31kawlca7npeldocnf2chnzrfxd4" target="_blank">Spotify</a>
     </div>
-  </div>
-</div>
+</section>
+
+<section class="reveal">
+    <h2>About</h2>
+    <p style="margin-top:20px;color:#aaa;">
+        Website bertema gelap dengan animasi modern, scroll effect,
+        dan nuansa elegan futuristik.
+    </p>
+</section>
+
+<footer>
+    © 2026 Davis Ikball
+</footer>
 
 <script>
-/* LIGHTS */
-for(let i=0;i<120;i++){
-  const l=document.createElement("span");
-  l.style.left=Math.random()*100+"vw";
-  l.style.animationDuration=5+Math.random()*6+"s";
-  document.querySelector(".lights").appendChild(l);
-}
+const reveals = document.querySelectorAll('.reveal');
 
-/* MUSIC */
-const music=document.getElementById("music");
-let musicStarted=false;
-
-function toggleMusic(){
-  if(music.paused){ music.play(); }
-  else{ music.pause(); }
-}
-
-/* TEXT ACAK (PASTI GANTI) */
-const texts=[
- "Cinta bukan tentang siapa yang datang lebih dulu,<br>tapi siapa yang memilih bertahan.",
- "Davis menemukan rumah di senyum Yonna,<br>dan Yonna menemukan tenang di pelukan Davis.",
- "Bersamamu, masa depan terasa layak diperjuangkan.",
- "Jika cinta adalah doa,<br>nama kalian selalu ada di setiap amin.",
- "Bukan kebetulan,<br>ini takdir yang diperjuangkan."
-];
-
-let last=-1;
-function nextText(){
-  if(!musicStarted){
-    music.play();
-    musicStarted=true;
-  }
-
-  let i;
-  do{
-    i=Math.floor(Math.random()*texts.length);
-  }while(i===last);
-  last=i;
-
-  const t=document.getElementById("text");
-  t.style.opacity=0;
-
-  setTimeout(()=>{
-    t.innerHTML=texts[i];
-    t.style.opacity=1;
-  },300);
-
-  spawnHeart();
-}
-
-/* HEART */
-function spawnHeart(){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤";
-  h.style.left=Math.random()*100+"vw";
-  h.style.bottom="0";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),4000);
-}
+window.addEventListener('scroll',()=>{
+    reveals.forEach(el=>{
+        const top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            el.classList.add('active');
+        }
+    });
+});
 </script>
 
 </body>
