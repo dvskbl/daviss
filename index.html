@@ -18,7 +18,7 @@ body{
   color:#fff;
 }
 
-/* BACKGROUND LIGHTS */
+/* BACKGROUND LIGHT */
 .lights span{
   position:absolute;
   width:6px;
@@ -50,10 +50,10 @@ body{
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(18px);
   box-shadow:0 0 50px rgba(255,105,180,0.35);
-  animation: cardFloat 5s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite;
 }
 
-@keyframes cardFloat{
+@keyframes float{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-18px)}
 }
@@ -80,14 +80,8 @@ p{
   font-size:17px;
   line-height:1.9;
   margin-bottom:25px;
-  opacity:0;
-  animation: fadeIn 1.8s ease forwards;
-  animation-delay:.5s;
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+  opacity:1;
+  transition:opacity 0.4s ease;
 }
 
 button{
@@ -108,7 +102,7 @@ button:hover{
   box-shadow:0 0 35px rgba(255,105,180,1);
 }
 
-/* HEARTS */
+/* HEART */
 .heart{
   position:absolute;
   font-size:22px;
@@ -131,7 +125,7 @@ button:hover{
 
 <body>
 
-<!-- MUSIK -->
+<!-- MUSIC -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3c1a1f91.mp3?filename=romantic-love-story-112191.mp3" type="audio/mpeg">
 </audio>
@@ -144,9 +138,7 @@ button:hover{
     <div class="subtitle">CINTA · TAKDIR · SELAMANYA</div>
 
     <p id="text">
-      Dari sekian banyak pertemuan,<br>
-      semesta memilihkan satu yang bernama<br>
-      Davis & Yonna.
+      Klik tombol di bawah ini 🤍
     </p>
 
     <button onclick="nextText()">💖 Sentuh Cinta</button>
@@ -160,7 +152,7 @@ button:hover{
 
 <script>
 /* LIGHTS */
-for(let i=0;i<110;i++){
+for(let i=0;i<120;i++){
   const l=document.createElement("span");
   l.style.left=Math.random()*100+"vw";
   l.style.animationDuration=5+Math.random()*6+"s";
@@ -172,14 +164,11 @@ const music=document.getElementById("music");
 let musicStarted=false;
 
 function toggleMusic(){
-  if(music.paused){
-    music.play();
-  }else{
-    music.pause();
-  }
+  if(music.paused){ music.play(); }
+  else{ music.pause(); }
 }
 
-/* TEXTS */
+/* TEXT ACAK (PASTI GANTI) */
 const texts=[
  "Cinta bukan tentang siapa yang datang lebih dulu,<br>tapi siapa yang memilih bertahan.",
  "Davis menemukan rumah di senyum Yonna,<br>dan Yonna menemukan tenang di pelukan Davis.",
@@ -196,11 +185,14 @@ function nextText(){
   }
 
   let i;
-  do{i=Math.floor(Math.random()*texts.length)}while(i===last);
+  do{
+    i=Math.floor(Math.random()*texts.length);
+  }while(i===last);
   last=i;
 
   const t=document.getElementById("text");
   t.style.opacity=0;
+
   setTimeout(()=>{
     t.innerHTML=texts[i];
     t.style.opacity=1;
