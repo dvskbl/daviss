@@ -9,58 +9,136 @@
 html,body{
   margin:0;
   padding:0;
-  background:#000;
-  overflow:hidden;
-  font-family: Arial, Helvetica, sans-serif;
+  background:#05010d;
+  color:white;
+  font-family: Inter, Arial, sans-serif;
+  overflow-x:hidden;
 }
 
+/* CANVAS */
 canvas{
   position:fixed;
   inset:0;
   z-index:-1;
 }
 
-/* CENTER TEXT */
-.center{
-  position:absolute;
-  inset:0;
+/* HERO */
+.hero{
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
-  color:white;
+  padding:40px;
 }
 
 .name{
-  font-size:1.6rem;
+  font-size:2rem;
   letter-spacing:6px;
-  text-shadow:0 0 20px #ff6a00;
+  background:linear-gradient(90deg,#00ffa3,#dc1fff,#00ffa3);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:gradient 6s linear infinite;
 }
 
-.quote{
-  margin-top:12px;
-  font-size:0.9rem;
-  color:#ccc;
-  opacity:0.85;
+@keyframes gradient{
+  from{background-position:0%;}
+  to{background-position:200%;}
+}
+
+.tagline{
+  margin-top:14px;
+  font-size:0.95rem;
+  color:#cfc6ff;
+  opacity:0;
+  animation:fadeUp 1.5s ease forwards;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* SCROLL */
+.scroll{
+  margin-top:60px;
+  font-size:12px;
+  opacity:0.5;
+  animation:upDown 1.4s infinite;
+}
+
+@keyframes upDown{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(10px);}
+}
+
+/* SOCIAL */
+.section{
+  padding:100px 10%;
+}
+
+.social{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+}
+
+.social a{
+  padding:20px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  text-decoration:none;
+  color:white;
+  text-align:center;
+  transition:0.4s;
+}
+
+.social a:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 30px rgba(120,0,255,0.4);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px;
+  font-size:12px;
+  color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="fire"></canvas>
+<canvas id="bg"></canvas>
 
-<div class="center">
+<div class="hero">
   <div class="name">DAVIS IKBALL</div>
-  <div class="quote">Tenang, tapi menyala.</div>
+  <div class="tagline">Fast. Clean. Future-Driven.</div>
+  <div class="scroll">SCROLL ↓</div>
 </div>
 
+<div class="section">
+  <div class="social">
+    <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@ikbald_" target="_blank">TikTok</a>
+    <a href="https://t.me/davisikball" target="_blank">Telegram</a>
+    <a href="https://twitter.com/Davisikball" target="_blank">Twitter</a>
+    <a href="https://wa.me/message/I6EZVKRNHE27A1" target="_blank">WhatsApp</a>
+    <a href="https://youtube.com/@Davisikball" target="_blank">YouTube</a>
+    <a href="https://open.spotify.com/user/31kawlca7npeldocnf2chnzrfxd4" target="_blank">Spotify</a>
+  </div>
+</div>
+
+<footer>© Davis Ikball</footer>
+
 <script>
-const canvas = document.getElementById("fire");
+const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-let w, h;
+let w,h;
 function resize(){
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
@@ -68,43 +146,26 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-const particles = [];
-
-class Particle{
-  constructor(){
-    this.x = Math.random()*w;
-    this.y = h + Math.random()*100;
-    this.size = Math.random()*3 + 1;
-    this.speed = Math.random()*2 + 1;
-    this.alpha = Math.random();
-  }
-  update(){
-    this.y -= this.speed;
-    this.alpha -= 0.005;
-    if(this.alpha <= 0){
-      this.y = h;
-      this.alpha = 1;
-      this.x = Math.random()*w;
-    }
-  }
-  draw(){
-    ctx.fillStyle = `rgba(255,120,0,${this.alpha})`;
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-    ctx.fill();
-  }
-}
-
-for(let i=0;i<180;i++){
-  particles.push(new Particle());
-}
-
+let t = 0;
 function animate(){
   ctx.clearRect(0,0,w,h);
-  particles.forEach(p=>{
-    p.update();
-    p.draw();
-  });
+
+  for(let i=0;i<3;i++){
+    ctx.beginPath();
+    for(let x=0;x<w;x+=10){
+      let y = h/2 + Math.sin(x*0.01 + t + i)*60;
+      ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle = i===0
+      ? "rgba(0,255,160,0.25)"
+      : i===1
+      ? "rgba(180,0,255,0.25)"
+      : "rgba(0,200,255,0.2)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  t += 0.01;
   requestAnimationFrame(animate);
 }
 animate();
