@@ -22,6 +22,15 @@ canvas{
   bottom:0;
   width:100%;
   height:100%;
+  z-index:-2;
+  pointer-events:none;
+}
+
+/* OVERLAY AGAR TEKS TERBACA */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
   z-index:-1;
 }
 
@@ -38,18 +47,18 @@ section{
 
 /* HERO TEXT */
 .name{
-  font-size:1.8rem;
+  font-size:1.9rem;
   letter-spacing:6px;
   text-shadow:
-    0 0 10px #ff5500,
-    0 0 30px #ff2200;
+    0 0 10px #ff7700,
+    0 0 35px #ff3300;
 }
 
 .quote{
   margin-top:14px;
   font-size:0.95rem;
-  color:#ddd;
-  opacity:0.85;
+  color:#eee;
+  opacity:0.9;
 }
 
 /* SCROLL */
@@ -76,17 +85,19 @@ section{
 
 .social a{
   padding:20px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;
+  background:rgba(0,0,0,0.35); /* transparan */
+  border:1px solid rgba(255,255,255,0.15);
   text-decoration:none;
   color:white;
+  backdrop-filter: blur(6px);
   transition:0.4s;
 }
 
 .social a:hover{
   transform:translateY(-8px);
-  box-shadow:0 0 25px rgba(255,120,0,0.5);
+  box-shadow:0 0 30px rgba(255,120,0,0.6);
+  border-color:#ff8800;
 }
 
 /* FOOTER */
@@ -94,7 +105,7 @@ footer{
   text-align:center;
   padding:40px;
   font-size:12px;
-  color:#777;
+  color:#aaa;
 }
 </style>
 </head>
@@ -102,10 +113,11 @@ footer{
 <body>
 
 <canvas id="fire"></canvas>
+<div class="overlay"></div>
 
 <!-- HERO -->
 <section>
-  <div class="name">Davisikbal</div>
+  <div class="name">DAVISIKBAL</div>
   <div class="quote">Tenang di luar, membara di dalam.</div>
   <div class="scroll">SCROLL ↓</div>
 </section>
@@ -146,14 +158,14 @@ class FireParticle{
   }
   reset(){
     this.x = Math.random()*w;
-    this.y = h + Math.random()*100;
+    this.y = h + Math.random()*120;
     this.size = Math.random()*3 + 1;
-    this.speed = Math.random()*2 + 1;
-    this.life = Math.random()*80 + 60;
+    this.speed = Math.random()*2.2 + 1;
+    this.life = Math.random()*90 + 60;
   }
   update(){
     this.y -= this.speed;
-    this.x += Math.sin(this.y*0.02)*0.5;
+    this.x += Math.sin(this.y*0.015)*0.6;
     this.life--;
     if(this.life <= 0){
       this.reset();
@@ -162,19 +174,19 @@ class FireParticle{
   draw(){
     const g = ctx.createRadialGradient(
       this.x,this.y,0,
-      this.x,this.y,this.size*4
+      this.x,this.y,this.size*5
     );
-    g.addColorStop(0,"rgba(255,220,120,0.9)");
-    g.addColorStop(0.5,"rgba(255,120,0,0.6)");
+    g.addColorStop(0,"rgba(255,230,150,1)");
+    g.addColorStop(0.4,"rgba(255,140,0,0.8)");
     g.addColorStop(1,"rgba(255,0,0,0)");
     ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size*4,0,Math.PI*2);
+    ctx.arc(this.x,this.y,this.size*5,0,Math.PI*2);
     ctx.fill();
   }
 }
 
-for(let i=0;i<260;i++){
+for(let i=0;i<300;i++){
   particles.push(new FireParticle());
 }
 
