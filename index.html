@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Untuk Kamu — Davis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+/* BACKGROUND ANIMATION */
+.stars span{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:0.6;
+  animation: twinkle linear infinite;
+}
+
+@keyframes twinkle{
+  from{ transform:translateY(0); opacity:0 }
+  to{ transform:translateY(100vh); opacity:1 }
+}
+
+/* CENTER CARD */
+.container{
+  position:relative;
+  z-index:2;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  width:380px;
+  padding:35px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 40px rgba(255,0,100,0.25);
+  text-align:center;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{ transform:translateY(0)}
+  50%{ transform:translateY(-15px)}
+}
+
+h1{
+  color:#ff4d6d;
+  margin-bottom:15px;
+  font-size:30px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px #ff4d6d}
+  to{text-shadow:0 0 25px #ff4d6d}
+}
+
+p{
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:20px;
+  opacity:0;
+  animation: fadeUp 1.5s ease forwards;
+  animation-delay:0.5s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(255,77,109,0.7);
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(255,77,109,1);
+}
+
+.from{
+  margin-top:15px;
+  font-size:13px;
+  color:#aaa;
+}
+
+/* HEART ANIMATION */
+.heart{
+  position:absolute;
+  color:#ff4d6d;
+  font-size:20px;
+  animation: rise 4s linear forwards;
+}
+
+@keyframes rise{
+  from{transform:translateY(0) scale(1); opacity:1}
+  to{transform:translateY(-300px) scale(1.8); opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- STARS -->
+<div class="stars"></div>
+
+<div class="container">
+  <div class="card">
+    <h1>Hai, Kamu 🤍</h1>
+    <p id="text">
+      Aku nggak pandai merangkai kata,<br>
+      tapi setiap kamu muncul di pikiranku,<br>
+      dunia terasa lebih masuk akal.
+    </p>
+    <button onclick="nextGombal()">Klik Pelan-Pelan 😉</button>
+    <div class="from">— Davis</div>
+  </div>
+</div>
+
+<script>
+/* STARS GENERATOR */
+for(let i=0;i<120;i++){
+  const star=document.createElement("span");
+  star.style.left=Math.random()*100+"vw";
+  star.style.top=Math.random()*100+"vh";
+  star.style.animationDuration=3+Math.random()*5+"s";
+  document.querySelector(".stars").appendChild(star);
+}
+
+/* GOMBALAN */
+const gombal=[
+ "Kalau kamu hujan,<br>aku rela kehujanan asal bareng kamu.",
+ "Aku nggak butuh peta,<br>soalnya hatiku selalu ke kamu.",
+ "Kamu itu sederhana,<br>tapi bikin hidupku luar biasa.",
+ "Kalau rindu itu dosa,<br>aku udah masuk neraka dari lama.",
+ "Tenang aja,<br>aku bukan singgah… aku niat tinggal."
+];
+
+let index=0;
+function nextGombal(){
+  index=(index+1)%gombal.length;
+  const text=document.getElementById("text");
+  text.style.opacity=0;
+  setTimeout(()=>{
+    text.innerHTML=gombal[index];
+    text.style.opacity=1;
+  },300);
+  spawnHeart();
+}
+
+/* HEART EFFECT */
+function spawnHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="0";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+}
+</script>
+
+</body>
+</html>
