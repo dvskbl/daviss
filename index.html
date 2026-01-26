@@ -6,189 +6,109 @@
 <title>Davis Ikball</title>
 
 <style>
-*{
+html,body{
   margin:0;
   padding:0;
-  box-sizing:border-box;
+  background:#000;
+  overflow:hidden;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html,body{
-  background:#020202;
-  color:#fff;
-  overflow-x:hidden;
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
 }
 
-/* ===== SECTION ===== */
-section{
-  min-height:100vh;
+/* CENTER TEXT */
+.center{
+  position:absolute;
+  inset:0;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  position:relative;
-  padding:40px;
-  overflow:hidden;
+  text-align:center;
+  color:white;
 }
 
-/* ===== LEAVES CONTAINER ===== */
-.leaves{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-/* ===== LEAF ===== */
-.leaf{
-  position:absolute;
-  top:-10%;
-  width:14px;
-  height:14px;
-  background:linear-gradient(135deg,#7CFF9B,#FFE27A);
-  border-radius:0 100% 0 100%;
-  opacity:0.8;
-  animation: fall linear infinite;
-}
-
-@keyframes fall{
-  0%{
-    transform:translateX(0) translateY(0) rotate(0deg);
-  }
-  100%{
-    transform:translateX(120px) translateY(120vh) rotate(360deg);
-  }
-}
-
-/* MANY LEAVES */
-.leaf:nth-child(odd){animation-duration:12s;}
-.leaf:nth-child(even){animation-duration:16s;}
-
-.leaf:nth-child(1){left:5%;}
-.leaf:nth-child(2){left:10%;}
-.leaf:nth-child(3){left:15%;}
-.leaf:nth-child(4){left:20%;}
-.leaf:nth-child(5){left:25%;}
-.leaf:nth-child(6){left:30%;}
-.leaf:nth-child(7){left:35%;}
-.leaf:nth-child(8){left:40%;}
-.leaf:nth-child(9){left:45%;}
-.leaf:nth-child(10){left:50%;}
-.leaf:nth-child(11){left:55%;}
-.leaf:nth-child(12){left:60%;}
-.leaf:nth-child(13){left:65%;}
-.leaf:nth-child(14){left:70%;}
-.leaf:nth-child(15){left:75%;}
-.leaf:nth-child(16){left:80%;}
-.leaf:nth-child(17){left:85%;}
-.leaf:nth-child(18){left:90%;}
-.leaf:nth-child(19){left:95%;}
-.leaf:nth-child(20){left:98%;}
-
-/* ===== NAME ===== */
 .name{
-  font-size:1.4rem;
+  font-size:1.6rem;
   letter-spacing:6px;
-  opacity:0.95;
-  animation:glow 2s ease-in-out infinite alternate;
-  z-index:2;
+  text-shadow:0 0 20px #ff6a00;
 }
 
-@keyframes glow{
-  from{text-shadow:0 0 6px rgba(0,255,255,0.3);}
-  to{text-shadow:0 0 18px rgba(0,255,255,0.9);}
-}
-
-/* ===== QUOTE ===== */
 .quote{
-  margin-top:14px;
+  margin-top:12px;
   font-size:0.9rem;
-  letter-spacing:1px;
   color:#ccc;
-  animation:fadeUp 1.2s ease forwards;
-}
-
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* SCROLL */
-.scroll{
-  margin-top:50px;
-  font-size:12px;
-  opacity:0.6;
-  animation:upDown 1.4s infinite;
-}
-
-@keyframes upDown{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(8px);}
-}
-
-/* ===== SOCIAL ===== */
-.social{
-  width:100%;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:22px;
-}
-
-.social a{
-  padding:18px;
-  text-align:center;
-  text-decoration:none;
-  color:#fff;
-  border:1px solid #222;
-  background:rgba(255,255,255,0.03);
-  transition:0.3s;
-}
-
-.social a:hover{
-  transform:translateY(-6px);
-  border-color:#0ff;
-  box-shadow:0 0 12px rgba(0,255,255,0.4);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  font-size:12px;
-  color:#555;
-  padding:30px;
+  opacity:0.85;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section>
-  <div class="leaves">
-    <!-- 20 leaves -->
-    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
-    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
-    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
-    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
-  </div>
+<canvas id="fire"></canvas>
 
+<div class="center">
   <div class="name">DAVIS IKBALL</div>
-  <div class="quote">Diam, bergerak, lalu tumbuh — dengan caraku sendiri.</div>
-  <div class="scroll">SCROLL ↓</div>
-</section>
+  <div class="quote">Tenang, tapi menyala.</div>
+</div>
 
-<section>
-  <div class="social">
-    <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
-    <a href="https://tiktok.com/@ikbald_" target="_blank">TikTok</a>
-    <a href="https://t.me/davisikball" target="_blank">Telegram</a>
-    <a href="https://twitter.com/Davisikball" target="_blank">Twitter</a>
-    <a href="https://wa.me/message/I6EZVKRNHE27A1" target="_blank">WhatsApp Business</a>
-    <a href="https://youtube.com/@Davisikball" target="_blank">YouTube</a>
-    <a href="https://open.spotify.com/user/31kawlca7npeldocnf2chnzrfxd4" target="_blank">Spotify</a>
-  </div>
-</section>
+<script>
+const canvas = document.getElementById("fire");
+const ctx = canvas.getContext("2d");
 
-<footer>© Davis Ikball</footer>
+let w, h;
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const particles = [];
+
+class Particle{
+  constructor(){
+    this.x = Math.random()*w;
+    this.y = h + Math.random()*100;
+    this.size = Math.random()*3 + 1;
+    this.speed = Math.random()*2 + 1;
+    this.alpha = Math.random();
+  }
+  update(){
+    this.y -= this.speed;
+    this.alpha -= 0.005;
+    if(this.alpha <= 0){
+      this.y = h;
+      this.alpha = 1;
+      this.x = Math.random()*w;
+    }
+  }
+  draw(){
+    ctx.fillStyle = `rgba(255,120,0,${this.alpha})`;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<180;i++){
+  particles.push(new Particle());
+}
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 
 </body>
 </html>
