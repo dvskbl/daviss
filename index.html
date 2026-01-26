@@ -19,7 +19,7 @@ html,body{
   overflow-x:hidden;
 }
 
-/* SECTION BASE */
+/* ===== SECTION ===== */
 section{
   min-height:100vh;
   display:flex;
@@ -28,26 +28,39 @@ section{
   align-items:center;
   position:relative;
   padding:40px;
+  overflow:hidden;
 }
 
-/* ANIMATED BACKGROUND (SAFE) */
-section::before{
-  content:"";
+/* ===== FALLING LEAVES ===== */
+.leaf{
   position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(0,255,255,0.12), transparent 60%),
-    radial-gradient(circle at 80% 70%, rgba(255,0,255,0.12), transparent 60%);
-  animation:bgFloat 8s ease-in-out infinite alternate;
-  z-index:-1;
+  top:-50px;
+  width:18px;
+  height:18px;
+  background:rgba(0,255,180,0.5);
+  border-radius:50% 0;
+  opacity:0.7;
+  animation: fall linear infinite;
 }
 
-@keyframes bgFloat{
-  from{transform:scale(1);}
-  to{transform:scale(1.08);}
+@keyframes fall{
+  from{
+    transform:translateY(-60px) translateX(0) rotate(0deg);
+  }
+  to{
+    transform:translateY(110vh) translateX(80px) rotate(360deg);
+  }
 }
 
-/* NAME */
+/* generate different leaves */
+.leaf:nth-child(1){left:10%; animation-duration:12s;}
+.leaf:nth-child(2){left:25%; animation-duration:15s;}
+.leaf:nth-child(3){left:40%; animation-duration:10s;}
+.leaf:nth-child(4){left:55%; animation-duration:14s;}
+.leaf:nth-child(5){left:70%; animation-duration:11s;}
+.leaf:nth-child(6){left:85%; animation-duration:16s;}
+
+/* ===== NAME ===== */
 .name{
   font-size:1.4rem;
   letter-spacing:6px;
@@ -56,13 +69,29 @@ section::before{
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 6px #0ff4;}
-  to{text-shadow:0 0 18px #0ff;}
+  from{text-shadow:0 0 6px rgba(0,255,255,0.3);}
+  to{text-shadow:0 0 18px rgba(0,255,255,0.8);}
 }
 
-/* SCROLL TEXT */
+/* ===== QUOTE ===== */
+.quote{
+  margin-top:14px;
+  font-size:0.9rem;
+  letter-spacing:1px;
+  color:#aaa;
+  opacity:0;
+  animation:fadeUp 1.5s ease forwards;
+  animation-delay:0.6s;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* SCROLL */
 .scroll{
-  margin-top:40px;
+  margin-top:50px;
   font-size:12px;
   opacity:0.6;
   animation:upDown 1.4s infinite;
@@ -73,7 +102,7 @@ section::before{
   50%{transform:translateY(8px);}
 }
 
-/* SOCIAL */
+/* ===== SOCIAL ===== */
 .social{
   width:100%;
   display:grid;
@@ -88,13 +117,13 @@ section::before{
   color:#fff;
   border:1px solid #222;
   background:rgba(255,255,255,0.03);
-  transition:transform .3s, box-shadow .3s;
+  transition:0.3s;
 }
 
 .social a:hover{
   transform:translateY(-6px);
-  box-shadow:0 0 12px rgba(0,255,255,0.4);
   border-color:#0ff;
+  box-shadow:0 0 12px rgba(0,255,255,0.4);
 }
 
 /* FOOTER */
@@ -109,11 +138,22 @@ footer{
 
 <body>
 
+<!-- HERO -->
 <section>
+  <!-- leaves -->
+  <span class="leaf"></span>
+  <span class="leaf"></span>
+  <span class="leaf"></span>
+  <span class="leaf"></span>
+  <span class="leaf"></span>
+  <span class="leaf"></span>
+
   <div class="name">DAVIS IKBALL</div>
+  <div class="quote">Diam, bergerak, lalu tumbuh — dengan caraku sendiri.</div>
   <div class="scroll">SCROLL ↓</div>
 </section>
 
+<!-- SOCIAL -->
 <section>
   <div class="social">
     <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
