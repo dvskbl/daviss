@@ -3,191 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Davisikbal</title>
+<title>Untuk Yonna Sayang 🌸</title>
 
 <style>
-html,body{
-  margin:0;
-  padding:0;
-  background:#000;
-  color:white;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x:hidden;
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ff9ec4,#ffd6e7);
+    overflow:hidden;
 }
 
-/* FIRE CANVAS — DI ATAS SEMUA */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:10;
-  pointer-events:none;
-  mix-blend-mode:screen;
+/* kartu */
+.card{
+    position:relative;
+    background: rgba(255,255,255,0.95);
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    width:85%;
+    max-width:500px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    z-index:10;
 }
 
-/* CONTENT */
-main{
-  position:relative;
-  z-index:1;
+h1{ color:#ff4f81; }
+p{ color:#444; font-size:18px; }
+
+/* bunga jatuh */
+.flower{
+    position:absolute;
+    top:-50px;
+    font-size:26px;
+    cursor:pointer;
+    animation: fall linear forwards;
 }
 
-/* SECTION */
-section{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:60px 10%;
-  background:none; /* PENTING */
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
 }
 
-/* TEXT */
-.name{
-  font-size:1.9rem;
-  letter-spacing:6px;
-  text-shadow:
-    0 0 12px #ff8800,
-    0 0 40px #ff3300;
+/* efek ledakan */
+.petal{
+    position:absolute;
+    font-size:18px;
+    animation: explode 0.8s forwards;
 }
 
-.quote{
-  margin-top:14px;
-  font-size:0.95rem;
-  color:#eee;
-  opacity:0.9;
-}
-
-.scroll{
-  margin-top:60px;
-  font-size:12px;
-  opacity:0.6;
-  animation:upDown 1.4s infinite;
-}
-
-@keyframes upDown{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(10px);}
-}
-
-/* SOCIAL */
-.social{
-  width:100%;
-  max-width:900px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:26px;
-}
-
-.social a{
-  padding:20px;
-  border-radius:14px;
-  text-decoration:none;
-  color:white;
-  background:rgba(0,0,0,0.25);
-  border:1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px);
-  transition:0.4s;
-}
-
-.social a:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 30px rgba(255,120,0,0.7);
-  border-color:#ff9900;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px;
-  font-size:12px;
-  color:#aaa;
+@keyframes explode{
+    from{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        opacity:0;
+        transform:translate(var(--x), var(--y)) scale(1.8);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="fire"></canvas>
+<div class="card">
+    <h1>Selamat Ulang Tahun ke-20 🌸</h1>
+    <h2>Yonna Sayang ❤️</h2>
 
-<main>
+    <p>
+    Makasih ya udah hadir di hidup aku dan bikin semuanya terasa lebih indah.
+    Senyum kamu selalu jadi hal favorit aku.
+    </p>
 
-<section>
-  <div class="name">DAVISIKBAL</div>
-  <div class="quote">Tenang di luar, membara di dalam.</div>
-  <div class="scroll">SCROLL ↓</div>
-</section>
+    <p>
+    Semoga kamu selalu bahagia, sehat, dan semua mimpi kamu tercapai.
+    Kalau dunia lagi berat, inget ya… ada aku yang selalu di samping kamu.
+    </p>
 
-<section>
-  <div class="social">
-    <a href="https://instagram.com/ikbald_" target="_blank">Instagram</a>
-    <a href="https://tiktok.com/@ikbald_" target="_blank">TikTok</a>
-    <a href="https://t.me/davisikball" target="_blank">Telegram</a>
-    <a href="https://twitter.com/Davisikball" target="_blank">Twitter</a>
-    <a href="https://wa.me/message/I6EZVKRNHE27A1" target="_blank">WhatsApp Business</a>
-    <a href="https://youtube.com/@Davisikball" target="_blank">YouTube</a>
-    <a href="https://open.spotify.com/user/31kawlca7npeldocnf2chnzrfxd4" target="_blank">Spotify</a>
-  </div>
-</section>
-
-<footer>© Davisikbal</footer>
-
-</main>
+    <p>
+    Aku sayang banget sama kamu.
+    Hari ini kamu ulang tahun, tapi aku yang paling beruntung karena punya kamu 🌷
+    </p>
+</div>
 
 <script>
-const canvas = document.getElementById("fire");
-const ctx = canvas.getContext("2d");
 
-let w,h;
-function resize(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener("resize", resize);
+function explodeFlower(x,y){
+    for(let i=0;i<8;i++){
+        const petal=document.createElement("div");
+        petal.className="petal";
+        petal.innerHTML="🌸";
 
-const particles = [];
+        const angle=Math.random()*360;
+        const distance=60 + Math.random()*40;
 
-class Fire{
-  constructor(){
-    this.reset();
-  }
-  reset(){
-    this.x = Math.random()*w;
-    this.y = h + Math.random()*150;
-    this.size = Math.random()*4 + 2;
-    this.speed = Math.random()*2.5 + 1.5;
-    this.life = Math.random()*100 + 80;
-  }
-  update(){
-    this.y -= this.speed;
-    this.x += Math.sin(this.y*0.01)*0.8;
-    this.life--;
-    if(this.life<=0) this.reset();
-  }
-  draw(){
-    const g = ctx.createRadialGradient(
-      this.x,this.y,0,
-      this.x,this.y,this.size*6
-    );
-    g.addColorStop(0,"rgba(255,240,180,1)");
-    g.addColorStop(0.4,"rgba(255,160,0,0.85)");
-    g.addColorStop(1,"rgba(255,0,0,0)");
-    ctx.fillStyle=g;
-    ctx.beginPath();
-    ctx.arc(this.x,this.y,this.size*6,0,Math.PI*2);
-    ctx.fill();
-  }
+        petal.style.left=x+"px";
+        petal.style.top=y+"px";
+        petal.style.setProperty('--x', Math.cos(angle)*distance+'px');
+        petal.style.setProperty('--y', Math.sin(angle)*distance+'px');
+
+        document.body.appendChild(petal);
+
+        setTimeout(()=>petal.remove(),800);
+    }
 }
 
-for(let i=0;i<380;i++) particles.push(new Fire());
+function createFlower(){
+    const flower=document.createElement("div");
+    flower.className="flower";
+    flower.innerHTML="🌸";
 
-function animate(){
-  ctx.clearRect(0,0,w,h);
-  particles.forEach(p=>{p.update();p.draw();});
-  requestAnimationFrame(animate);
+    const left=Math.random()*100;
+    flower.style.left=left+"vw";
+    flower.style.animationDuration=(4+Math.random()*4)+"s";
+
+    flower.onclick=(e)=>{
+        explodeFlower(e.pageX,e.pageY);
+        flower.remove();
+    }
+
+    document.body.appendChild(flower);
+
+    setTimeout(()=>flower.remove(),8000);
 }
-animate();
+
+setInterval(createFlower,400);
+
 </script>
 
 </body>
