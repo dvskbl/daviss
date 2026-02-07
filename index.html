@@ -3,135 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Yonna Sayang 🌸</title>
+<title>Yonna Sayang ❤️</title>
 
 <style>
+
 body{
     margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg,#ff9ec4,#ffd6e7);
     overflow:hidden;
+    background: radial-gradient(circle at top,#0f2027,#203a43,#2c5364);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* bintang */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:0.8;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.2;}
+    to{opacity:1;}
+}
+
+/* bunga */
+.flower{
+    position:absolute;
+    font-size:14px;
+    transition:1.8s ease;
+}
+
+/* tulisan besar */
+#loveText{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:90px;
+    color:#ff7aa2;
+    opacity:0;
+    text-shadow:0 0 40px #ff7aa2;
+    animation: fadeIn 3s forwards;
+}
+
+@keyframes fadeIn{
+    to{opacity:0.15;}
+}
+
+/* teks klik */
+#bigMessage{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    font-size:80px;
+    color:#ff4f81;
+    text-shadow:0 0 30px #ff4f81;
+    transition:0.6s;
 }
 
 /* kartu */
 .card{
-    position:relative;
-    background: rgba(255,255,255,0.95);
-    padding:40px;
-    border-radius:25px;
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,0.95);
+    padding:25px 35px;
+    border-radius:20px;
     text-align:center;
-    width:85%;
-    max-width:500px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.2);
-    z-index:10;
+    box-shadow:0 10px 40px rgba(0,0,0,0.4);
 }
 
-h1{ color:#ff4f81; }
-p{ color:#444; font-size:18px; }
-
-/* bunga jatuh */
-.flower{
-    position:absolute;
-    top:-50px;
-    font-size:26px;
-    cursor:pointer;
-    animation: fall linear forwards;
+h2{
+    margin:0;
+    color:#ff4f81;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
-}
-
-/* efek ledakan */
-.petal{
-    position:absolute;
-    font-size:18px;
-    animation: explode 0.8s forwards;
-}
-
-@keyframes explode{
-    from{
-        opacity:1;
-        transform:translate(0,0) scale(1);
-    }
-    to{
-        opacity:0;
-        transform:translate(var(--x), var(--y)) scale(1.8);
-    }
-}
 </style>
 </head>
 
 <body>
 
+<div id="loveText">I LOVE YOU YONNA</div>
+<div id="bigMessage">Yonna Sayang ❤️</div>
+
 <div class="card">
-    <h1>Selamat Ulang Tahun ke-20 🌸</h1>
-    <h2>Yonna Sayang ❤️</h2>
-
-    <p>
-    Makasih ya udah hadir di hidup aku dan bikin semuanya terasa lebih indah.
-    Senyum kamu selalu jadi hal favorit aku.
-    </p>
-
-    <p>
-    Semoga kamu selalu bahagia, sehat, dan semua mimpi kamu tercapai.
-    Kalau dunia lagi berat, inget ya… ada aku yang selalu di samping kamu.
-    </p>
-
-    <p>
-    Aku sayang banget sama kamu.
-    Hari ini kamu ulang tahun, tapi aku yang paling beruntung karena punya kamu 🌷
-    </p>
+<h2>Selamat Ulang Tahun ke-20 🌸</h2>
+<p>Aku beruntung banget punya kamu. Jangan kemana-mana ya ❤️</p>
 </div>
+
+<!-- musik romantis -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-background-112191.mp3">
+</audio>
 
 <script>
 
-function explodeFlower(x,y){
-    for(let i=0;i<8;i++){
-        const petal=document.createElement("div");
-        petal.className="petal";
-        petal.innerHTML="🌸";
-
-        const angle=Math.random()*360;
-        const distance=60 + Math.random()*40;
-
-        petal.style.left=x+"px";
-        petal.style.top=y+"px";
-        petal.style.setProperty('--x', Math.cos(angle)*distance+'px');
-        petal.style.setProperty('--y', Math.sin(angle)*distance+'px');
-
-        document.body.appendChild(petal);
-
-        setTimeout(()=>petal.remove(),800);
-    }
+/* bikin bintang */
+for(let i=0;i<120;i++){
+    const star=document.createElement("div");
+    star.className="star";
+    star.style.left=Math.random()*window.innerWidth+"px";
+    star.style.top=Math.random()*window.innerHeight+"px";
+    star.style.animationDuration=(1+Math.random()*3)+"s";
+    document.body.appendChild(star);
 }
 
-function createFlower(){
-    const flower=document.createElement("div");
-    flower.className="flower";
-    flower.innerHTML="🌸";
+/* bunga */
+const flowers=[];
+const flowerCount=180;
 
-    const left=Math.random()*100;
-    flower.style.left=left+"vw";
-    flower.style.animationDuration=(4+Math.random()*4)+"s";
-
-    flower.onclick=(e)=>{
-        explodeFlower(e.pageX,e.pageY);
-        flower.remove();
-    }
-
-    document.body.appendChild(flower);
-
-    setTimeout(()=>flower.remove(),8000);
+for(let i=0;i<flowerCount;i++){
+    const f=document.createElement("div");
+    f.className="flower";
+    f.innerHTML="🌸";
+    f.style.left=Math.random()*window.innerWidth+"px";
+    f.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(f);
+    flowers.push(f);
 }
 
-setInterval(createFlower,400);
+/* bentuk tulisan pakai canvas */
+function formText(){
+
+    const canvas=document.createElement("canvas");
+    const ctx=canvas.getContext("2d");
+
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+
+    ctx.font="bold 120px Arial";
+    ctx.fillText("I LOVE YOU YONNA",50,canvas.height/2);
+
+    const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+
+    let points=[];
+
+    for(let y=0;y<canvas.height;y+=7){
+        for(let x=0;x<canvas.width;x+=7){
+            const index=(y*canvas.width+x)*4;
+            if(data[index+3]>150){
+                points.push({x,y});
+            }
+        }
+    }
+
+    flowers.forEach((flower,i)=>{
+        const p=points[i%points.length];
+        flower.style.left=p.x+"px";
+        flower.style.top=p.y+"px";
+    });
+}
+
+setTimeout(formText,1500);
+
+/* klik layar -> teks besar muncul */
+document.body.onclick=()=>{
+    const msg=document.getElementById("bigMessage");
+    msg.style.transform="translate(-50%,-50%) scale(1)";
+}
 
 </script>
 
